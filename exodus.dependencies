@@ -1,6 +1,6 @@
 [
   {
-    "repository": "vendor_samsung_d2spr",
-    "target_path": "vendor/samsung/d2spr"
+    "repository": "vendor_samsung_serrano-common",
+    "target_path": "vendor/samsung/serrano-common"
   }
 ]
