@@ -6,8 +6,9 @@
     <!--       we should have an initial mixer setting (default value) -->
     <ctl name="TTY Mode" value="OFF" />
     <ctl name="SPK DAC Switch" value="0" />
-    <ctl name="SPK DRV Volume" value="7" />
     <ctl name="DAC1 Switch" value="0" />
+    <ctl name="COMP1 Switch" value="0" />
+    <ctl name="HPHL DAC Switch" value="0" />
     <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia1" value="0" />
     <ctl name="INTERNAL_BT_SCO_RX Audio Mixer MultiMedia5" value="0" />
     <ctl name="INTERNAL_BT_SCO_RX_Voice Mixer CSVoice" value="0" />
@@ -42,8 +43,7 @@
     <ctl name="RX2 MIX1 INP1" value="ZERO" />
     <ctl name="RX4 MIX1 INP1" value="ZERO" />
     <ctl name="RX1 MIX2 INP1" value="ZERO" />
-    <ctl name="RX1 MIX2 INP1" value="ZERO" />
-    <ctl name="HPHL DAC Switch" value="0" />
+    <ctl name="RX2 MIX2 INP1" value="ZERO" />
     <ctl name="Voice_Tx Mixer PRI_TX_Voice" value="0" />
     <ctl name="Voice_Tx Mixer INTERNAL_BT_SCO_TX_Voice" value="0" />
     <ctl name="Voip_Tx Mixer PRI_TX_Voip" value="0" />
@@ -52,12 +52,12 @@
     <ctl name="AFE_PCM_RX Audio Mixer MultiMedia2" value="0" />
     <ctl name="AFE_PCM_RX Audio Mixer MultiMedia5" value="0" />
     <ctl name="AFE_PCM_RX Port Mixer INTERNAL_FM_TX" value="0" />
-    <ctl name="AIF1_CAP Mixer SLIM TX1" value="ZERO" />
-    <ctl name="AIF1_CAP Mixer SLIM TX2" value="ZERO" />
+    <ctl name="AIF1_CAP Mixer SLIM TX1" value="0" />
+    <ctl name="AIF1_CAP Mixer SLIM TX2" value="0" />
     <ctl name="TX1 HPF Switch" value="0" />
     <ctl name="TX2 HPF Switch" value="0" />
-    <ctl name="TX1 HPF cut off" value="0" />
-    <ctl name="TX2 HPF cut off" value="0" />
+    <ctl name="TX1 HPF cut off" value="MIN_3DB_4Hz" />
+    <ctl name="TX2 HPF cut off" value="MIN_3DB_4Hz" />
 
     <!-- echo reference -->
     <ctl name="EC_REF_RX" value="NONE" />
@@ -216,17 +216,10 @@
 
     <!-- These are actual sound device specific mixer settings -->
     <path name="adc1">
-        <ctl name="PRI_TX Channels" value="Two" />
+        <ctl name="PRI_TX Channels" value="One" />
         <ctl name="AIF1_CAP Mixer SLIM TX1" value="1" />
-        <ctl name="AIF1_CAP Mixer SLIM TX2" value="1" />
-        <ctl name="SLIM TX1 MUX" value="DEC1" />
-        <ctl name="SLIM TX2 MUX" value="DEC2" />
-        <ctl name="DEC1 MUX" value="ADC1" />
-        <ctl name="DEC2 MUX" value="ADC2" />
-        <ctl name="TX1 HPF Switch" value="1" />
-        <ctl name="TX2 HPF Switch" value="1" />
-        <ctl name="TX1 HPF cut off" value="MIN_3DB_150Hz" />
-        <ctl name="TX2 HPF cut off" value="MIN_3DB_150Hz" />
+        <ctl name="SLIM TX1 MUX" value="DEC4" />
+        <ctl name="DEC4 MUX" value="ADC1" />
     </path>
 
     <path name="adc2">
@@ -266,14 +259,25 @@
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="DAC1 Switch" value="1" />
-        <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="RX1 Digital Volume" value="73" />
     </path>
 
     <path name="handset-mic">
-        <path name="adc1" />
+        <ctl name="PRI_TX Channels" value="Two" />
+        <ctl name="AIF1_CAP Mixer SLIM TX1" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX2" value="1" />
+        <ctl name="SLIM TX1 MUX" value="DEC1" />
+        <ctl name="SLIM TX2 MUX" value="DEC2" />
+        <ctl name="DEC1 MUX" value="ADC1" />
+        <ctl name="DEC2 MUX" value="ADC3" />
         <ctl name="ADC1 Volume" value="16" />
-        <ctl name="DEC4 Volume" value="84" />
+        <ctl name="ADC3 Volume" value="16" />
+        <ctl name="DEC1 Volume" value="84" />
+        <ctl name="DEC2 Volume" value="84" />
+        <ctl name="TX1 HPF Switch" value="1" />
+        <ctl name="TX2 HPF Switch" value="1" />
+        <ctl name="TX1 HPF cut off" value="MIN_3DB_150Hz" />
+        <ctl name="TX2 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="headphones">
@@ -306,7 +310,6 @@
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="DAC1 Switch" value="1" />
-        <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="RX1 Digital Volume" value="73" />
     </path>
 
@@ -316,9 +319,21 @@
     </path>
 
     <path name="voice-speaker-mic">
-        <path name="adc3" />
-        <ctl name="ADC3 Volume" value="14" />
-        <ctl name="DEC4 Volume" value="90" />
+        <ctl name="PRI_TX Channels" value="Two" />
+        <ctl name="AIF1_CAP Mixer SLIM TX1" value="1" />
+        <ctl name="AIF1_CAP Mixer SLIM TX2" value="1" />
+        <ctl name="SLIM TX1 MUX" value="DEC1" />
+        <ctl name="SLIM TX2 MUX" value="DEC2" />
+        <ctl name="DEC1 MUX" value="ADC1" />
+        <ctl name="DEC2 MUX" value="ADC3" />
+        <ctl name="ADC1 Volume" value="13" />
+        <ctl name="ADC3 Volume" value="13" />
+        <ctl name="DEC1 Volume" value="82" />
+        <ctl name="DEC2 Volume" value="82" />
+        <ctl name="TX1 HPF Switch" value="1" />
+        <ctl name="TX2 HPF Switch" value="1" />
+        <ctl name="TX1 HPF cut off" value="MIN_3DB_150Hz" />
+        <ctl name="TX2 HPF cut off" value="MIN_3DB_150Hz" />
     </path>
 
     <path name="voice-headphones">
@@ -370,7 +385,6 @@
         <ctl name="RX1 MIX1 INP1" value="RX1" />
         <ctl name="SLIM RX1 MUX" value="AIF1_PB" />
         <ctl name="DAC1 Switch" value="1" />
-        <ctl name="EAR PA Gain" value="POS_6_DB" />
         <ctl name="RX1 Digital Volume" value="73" />
     </path>
 
@@ -541,7 +555,7 @@
     </path>
 
     <path name="voice-tty-hco-headset-mic">
-        <path name="adc2" />
+        <path name="voice-tty-full-headset-mic" />
     </path>
 
     <path name="voice-tty-vco-handset-mic">
